@@ -26,19 +26,19 @@ tqdm version 4.36.1
 python code.py
 ```
 
-Visit website http://localhost:8080/ use your browser.
+Then visit website http://localhost:8080/ use your browser.
 
 ## Preview
 
 ### Home Page-Search for words
 
-![image-20211223222425499](pic\image-20211223222425499.png)
+![image-20211223222425499](pic/image-20211223222425499.png)
 
 ### Home Page-Search for pictures
 
-![image-20211223222514732](pic\image-20211223222514732.png)
+![image-20211223222514732](pic/image-20211223222514732.png)
 
 ### Results Page
 
-![image-20211223222334968](pic\image-20211223222334968.png)
+![image-20211223222334968](pic/image-20211223222334968.png)
 
