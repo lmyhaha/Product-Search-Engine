@@ -1,0 +1,261 @@
+$def with (th, nam, seq, term)
+
+<head>
+<meta name="referrer" content="no-referrer" />
+<style type="text/css">
+body{text-align:center;}
+.home img {
+	float:left;
+	left:25px;
+	top:25px;
+	position:absolute;
+	transition:all 0.8s ease-in-out;
+}
+.home img:hover {
+	transform:rotate(360deg);
+}
+a{
+	text-decoration:None;
+	font-size:30px;
+}
+.bar{height:85%;overflow:auto;}
+.fa{width:1560px;display:inline-block;bottom:50px;border-top:1px;}
+.ku{
+	margin:10px 10px 10px 10px;
+	width:500px;
+	height:700px;
+	float:left;
+	color:#0f5dfe;
+	background-size:100% 100%;
+}
+.ku:hover {
+	box-shadow: 0px 0px 4px 4px rgba(128,128,128,0.5);
+}
+.tu{
+	margin:50px 50px 20px 50px;
+	width:400px;
+	height:400px;
+}
+.ming{
+	display:inline-block;
+	font-size:30px;
+	height:117px;
+	overflow:hidden;
+	margin-left:10px;
+	margin-right:10px;
+	margin-bottom:13px;
+}
+.ffan{height:50px;width:100%;padding-top:20px;}
+.ffan .fan{
+	display:inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+	padding: 15px 20px;
+	border-radius: 50%;
+	line-height:30px;
+	background-color: rgba(0, 102, 255, 0.1);
+        color: #0f5dfe;
+        box-shadow: inset 0 0 0 1px #0f5dfe;
+        text-align: center;
+	text-decoration: none;
+	cursor:pointer;
+}
+.ffan .fan:hover{
+	color: black;
+	background-color: rgba(0, 102, 255, 1);
+}
+
+td{
+	font-size:30px;
+	border-bottom:1px solid #000;
+	min-width:200px;
+}
+.tou{
+	background-color:#e2e2e2;
+}
+button{border:0;font-size:30px;cursor:pointer;}
+.lan{width:100%;height:5px;background-color:black;}
+.pai{padding-top:10px;}
+.so{margin-left:50px;margin-right:50px;}
+#lashen{position:absolute;right:50px;}
+</style>
+<script>
+var ti = 12
+var m = new Array(4)
+m[0] = " "
+m[1] = " "
+m[2] = " "
+m[3] = "ku"
+m[4] = "0"
+var arr = new Array(3)
+arr[0] = "3"
+arr[1] = "3"
+arr[2] = "3"
+var n = new Array(3)
+n[0] = new Array(3)
+n[1] = new Array(3)
+n[2] = new Array(3)
+n[0][0] = "$term[0][0]"
+n[0][1] = "$term[0][1]"
+n[0][2] = "$term[0][2]"
+n[1][0] = "$term[1][0]"
+n[1][1] = "$term[1][1]"
+n[1][2] = "$term[1][2]"
+n[2][0] = "$term[2][0]"
+n[2][1] = "$term[2][1]"
+n[2][2] = "$term[2][2]"
+function ne() {
+	choose(0,3);
+	choose(1,3);
+	choose(2,3);
+	turn(1);
+	sortr(0);
+}
+function choose(a,b) {
+	if (b<3) {
+		m[a] = n[a][b];
+	} else {
+		m[a] = " ";
+	}
+	let pList=m.join(' ');
+	var w = document.getElementsByClassName("ku");
+	var x = document.getElementsByClassName(pList);
+	var pa = document.getElementsByClassName("fan");
+	var page = x.length/ti;
+	for (p=0;p<10;p++) {
+		if (p<page) {
+			pa[p].style.display="inline";
+		} else {
+			pa[p].style.display="none";
+		}
+	}
+	for (p=0;p<w.length;p++) {
+		w[p].style.display="none";
+	}
+	for (p=0;p<x.length;p++) {
+		x[p].style.display="inline";
+	}
+	for (i=0;i<4;++i) {
+		if(i==(b+1)%4) {
+			document.getElementsByTagName("button")[a*4+i].style.backgroundColor = "#007fff";
+		} else {
+			document.getElementsByTagName("button")[a*4+i].style.backgroundColor = "white";
+		}
+	}
+	turn(1);
+}
+function turn(c) {
+	let pList=m.join(' ');
+	var x = document.getElementsByClassName(pList);
+	var pa = document.getElementsByClassName("fan");
+	var page = x.length/ti;
+	for (p=0;p<x.length;p++) {
+		x[p].style.display="none";
+	}
+	if (c*ti<x.length) {
+		for (p=(c-1)*ti;p<c*ti;p++) {
+			x[p].style.display="inline";
+		}
+	} else {
+		for (p=(c-1)*ti;p<x.length;p++) {
+			x[p].style.display="inline";
+		}
+	}
+	for (p=0;p<10;p++) {
+		pa[p].style.color = "#0f5dfe";
+		pa[p].style.backgroundColor = "rgba(0, 102, 255, 0.1)";
+	}
+	pa[c-1].style.color = "black";
+	pa[c-1].style.backgroundColor = "rgb(0, 102, 255)";
+}
+function sortr(d) {
+	let pList=m.join(' ');
+	var x = document.getElementsByClassName(pList);
+	for (p=0;p<x.length;p++) {
+		x[p].style.display="none";
+	}
+	m[4] = d;
+	for (i=0;i<4;++i) {
+		if(i==d) {
+			document.getElementsByTagName("button")[12+i].style.backgroundColor = "#007fff";
+		} else {
+			document.getElementsByTagName("button")[12+i].style.backgroundColor = "white";
+		}
+	}
+	turn(1);
+}
+function lashen() {
+	if(document.getElementById("lashen").innerHTML=="↓") {
+		document.getElementsByTagName("table")[0].style.display="inline";
+		document.getElementById("lashen").innerHTML="↑";
+		document.getElementsByClassName("bar")[0].style.height="69%";
+	} else {
+		document.getElementsByTagName("table")[0].style.display="none";
+		document.getElementById("lashen").innerHTML="↓";
+		document.getElementsByClassName("bar")[0].style.height="85%";
+	}
+}
+</script>
+</head>
+<body onload="ne()">
+<a class="home" href="/">
+	<img src="static/home.png" width="100" height="80">
+</a>
+
+$if th == "img":
+	<h1>Search pic for <img src="static/rubbish/$nam" height="35"></h1>
+$else:
+	<h1>Search words for $nam</h1>
+
+<table style="margin:auto;display:none;text-align: center;">
+<tr>
+<td class="tou" style="border-top:1px solid #000;">类别</td>
+<td style="border-top:1px solid #000;"><button onclick="choose(0,3)">全部</button></td>
+<td style="border-top:1px solid #000;"><button onclick="choose(0,0)">$term[0][0]</button></td>
+<td style="border-top:1px solid #000;"><button onclick="choose(0,1)">$term[0][1]</button></td>
+<td style="border-top:1px solid #000;"><button onclick="choose(0,2)">$term[0][2]</button></td>
+</tr>
+<tr>
+<td class="tou">品牌</td>
+<td><button onclick="choose(1,3)">全部</button></td>
+<td><button onclick="choose(1,0)">$term[1][0]</button></td>
+<td><button onclick="choose(1,1)">$term[1][1]</button></td>
+<td><button onclick="choose(1,2)">$term[1][2]</button></td>
+</tr>
+<tr>
+<td class="tou">关键词</td>
+<td><button onclick="choose(2,3)">全部</button></td>
+<td><button onclick="choose(2,0)">$term[2][0]</button></td>
+<td><button onclick="choose(2,1)">$term[2][1]</button></td>
+<td><button onclick="choose(2,2)">$term[2][2]</button></td>
+</tr>
+</table>
+<div class="pai">
+	<button class="so" onclick="sortr(0)">相关度排序</button>
+	<button class="so" onclick="sortr(1)">价格↑</button>
+	<button class="so" onclick="sortr(2)">价格↓</button>
+	<button class="so" onclick="sortr(3)">质量排序</button>
+</div>
+<div class="lan"></div>
+<div class="bar">
+<button id="lashen" onclick="lashen()">↓</button>
+<div class="fa">
+	$for k in range(4):
+		$for i in seq[k]:
+			<div class="ku $i['kind'] $i['brand'] $i['features'][0] $i['features'][1] $i['features'][2] $k">
+				<img class="tu" src="http://$i['imgurl']"></img>
+				<div style="float:left;font-size:20px;color:red;">&emsp;¥$i['price']</div><div style="float:right">$i['quality']&emsp;</div>
+				<a class="ming" href="$i['url']">$i['title']</a>
+				<div style="float:left">&emsp;$i['kind']</div><div style="float:right">$i['brand']&emsp;</div>
+				<div><br><br>
+					$for j in i['features']:
+						$j&emsp;&emsp;
+				</div>
+			</div>
+</div>
+<div class="ffan">
+	$for j in range(1,11):
+		<div class="fan" onclick="turn($j)">$j</div>
+</div>
+</div>
+</body>

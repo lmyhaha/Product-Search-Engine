@@ -1,0 +1,131 @@
+$def with()
+
+<head>
+<style type="text/css">
+body{text-align:center;background-image:url("static/bk.jfif");background-size:100% 100%;}
+.fa{height:100%;width:100%;}	
+.ri{
+	position:absolute;
+	top:30%;
+	left:1200px;
+	height:65px;
+	width:200px;
+	border:none;
+	color:white;
+	background-color:rgb(0, 102, 255);
+	font-size:40px;
+	z-index:2;
+}
+.yue{
+	position:absolute;
+	top:30%;
+	left:1200px;
+	height:65px;
+	width:200px;
+	border:none;
+	color:white;
+	background-color:rgb(0, 102, 255);
+	font-size:40px;
+	z-index:3;
+}
+#souzi{
+	position:absolute;
+	top:30%;
+	left:400px;
+	width:800px;
+	height:65px;
+	border:1px solid #ccc; 
+	padding: 7px 0px;
+	border-radius: 3px;
+	padding-left:5px; 
+	font-size:40px;
+}
+#soutu{
+	position:absolute;
+	top:40%;
+	left:700px;
+}
+#preview{
+	position:absolute;
+	top:45%;
+	left:700px;
+	height:400px;
+	border:none;
+}
+#tu{
+	position:absolute;
+	top:30%;
+	left:1135px;
+	width:65px;
+	height:65px;
+	font-size:40px;
+}
+#cha{
+	position:absolute;
+	top:83%;
+	left:1335px;
+	width:65px;
+	height:65px;
+	font-size:40px;
+}
+#bk{
+	position:absolute;
+	top:35%;
+	left:400px;
+	width:1000px;
+	height:492px;
+	background-color:rgba(0, 102, 255, 0.2);
+	z-index:-1;
+}
+#title{position:relative;top:12%;width:360px;height:68px;}
+</style>
+<script>
+function imgPreview(fileDom){
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备");
+        }
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        if (!imageType.test(file.type)) {
+            alert("请选择图片格式文件");
+            return;
+        }
+        reader.onload = function(e) {
+            var img = document.getElementById("preview");
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+function change(){
+	document.getElementById("alltu").style.display="inline";
+	document.getElementById("cha").style.display="inline";
+	document.getElementById("bk").style.display="inline";
+	document.getElementById("tu").style.display="none";
+}
+function change2(){
+	document.getElementById("alltu").style.display="none";
+	document.getElementById("cha").style.display="none";
+	document.getElementById("bk").style.display="none";
+	document.getElementById("tu").style.display="inline";
+}
+</script>
+</head>
+<body onload="change2()">
+<div class="fa">
+<img src="static/ti.png" id="title">
+<form action="/s" method="GET" target="_blank">
+	<input type="text" name="name" id="souzi"/>
+    	<input class="ri" type="submit" value="文字搜索">
+</form>
+<button onclick="change()" id="tu">📷</button>
+<form action="/i" method="POST" enctype="multipart/form-data" target="_blank" id="alltu">
+	<input type="file" name="myfile" multiple onchange="imgPreview(this)" id="soutu"><br>
+    	<img id="preview"><br>
+    	<input class="yue" type="submit" value="图片搜索">
+</form>
+<button onclick="change2()" id="cha">&times;</button>
+<div id="bk" />
+</div>
+</body>
